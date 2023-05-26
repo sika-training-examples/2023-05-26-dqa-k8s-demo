@@ -12,7 +12,6 @@ spec:
       labels:
         app: {{ .Release.Name }}-server
     spec:
-      nodeName: sikademo-fw0mo
       containers:
         - name: main
           image: sikalabs/hello-world-server:v0.6.0
