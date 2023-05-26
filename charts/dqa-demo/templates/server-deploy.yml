@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-server
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
     spec:
       containers:
         - name: main
@@ -18,9 +20,9 @@ spec:
           ports:
             - name: http
               containerPort: 8000
-          env:
-            - name: TEXT
-              value: "Hello DQA!"
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}
           startupProbe:
             httpGet:
               path: /

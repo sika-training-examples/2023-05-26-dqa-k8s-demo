@@ -3,3 +3,4 @@ host:
 
 # === Optional ===
 replicas: 2
+suffix: ""
