@@ -25,3 +25,4 @@ spec:
       values: |
         host: dqa-demo-dev.k8s.sikademo.com
         replicas: 3
+        image: sikalabs/hello-world-server:v0.6.0
