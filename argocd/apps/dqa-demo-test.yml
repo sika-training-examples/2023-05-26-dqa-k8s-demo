@@ -3,6 +3,12 @@ kind: Application
 metadata:
   name: dqa-demo-test
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: 1=registry.sikalabs.com/examples/2023-05-26-dqa-k8s-demo:test
+    argocd-image-updater.argoproj.io/1.helm.image-spec: image
+    argocd-image-updater.argoproj.io/1.update-strategy: digest
+    argocd-image-updater.argoproj.io/1.force-update: 'true'
+    argocd-image-updater.argoproj.io/1.platforms: linux/amd64
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -25,4 +31,4 @@ spec:
       values: |
         host: dqa-demo-test.k8s.sikademo.com
         replicas: 10
-        image: registry.sikalabs.com/examples/2023-05-26-dqa-k8s-demo:master
+        image: registry.sikalabs.com/examples/2023-05-26-dqa-k8s-demo:test
