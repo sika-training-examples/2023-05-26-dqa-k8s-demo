@@ -4,3 +4,4 @@ metadata:
   name: {{ .Release.Name }}
 data:
   TEXT: "Hello DQA! {{ .Values.suffix }}"
+  REDIS_PASSWORD: {{ .Values.redisPassword }}

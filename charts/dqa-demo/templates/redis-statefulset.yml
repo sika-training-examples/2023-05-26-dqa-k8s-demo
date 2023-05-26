@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  serviceName: {{ .Release.Name }}-redis
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-redis
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-redis
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yml") . | sha256sum }}
+    spec:
+      containers:
+        - name: main
+          image: redis:6
+          args:
+            - redis-server
+            - --requirepass
+            - $(REDIS_PASSWORD)
+          ports:
+            - name: redis
+              containerPort: 6379
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}
+          startupProbe:
+            tcpSocket:
+              port: redis
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - redis-cli -a $REDIS_PASSWORD ping
