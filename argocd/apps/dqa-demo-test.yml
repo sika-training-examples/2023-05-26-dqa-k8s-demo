@@ -25,4 +25,4 @@ spec:
       values: |
         host: dqa-demo-test.k8s.sikademo.com
         replicas: 10
-        image: ondrejsika/kcd2023-example:2
+        image: registry.sikalabs.com/examples/2023-05-26-dqa-k8s-demo:master
