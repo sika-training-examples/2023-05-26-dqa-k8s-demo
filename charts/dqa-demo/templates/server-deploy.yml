@@ -21,3 +21,11 @@ spec:
           env:
             - name: TEXT
               value: "Hello DQA!"
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
